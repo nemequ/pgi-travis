@@ -1,0 +1,10 @@
+language: c
+sudo: false
+before_install:
+  - ./install-pgi.sh
+script:
+  - pgcc -dM -E /dev/null
+notifications:
+  email:
+    on_success: never
+    on_failure: never
