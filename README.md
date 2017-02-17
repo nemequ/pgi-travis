@@ -51,7 +51,7 @@ Currently, there are several arguments you can pass:
  - `--amd`: Install AMD tools.
  - `--java`: Install Java tools.
  - `--mpi`: Install MPI tools.
- - `--gpu`: Install GPU tools.
+ - `--mpi-gpu`: Install MPI GPU support.
  - `--managed`: Install managed tools.
  - `--verbose`: Be a bit more verbose.
 
