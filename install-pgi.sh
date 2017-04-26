@@ -36,22 +36,22 @@ while [ $# != 0 ]; do
 	    TEMPORARY_FILES="$2"; shift
 	    ;;
 	"--nvidia")
-	    export PGI_INSTALL_NVIDIA=true; shift
+	    export PGI_INSTALL_NVIDIA=true
 	    ;;
 	"--amd")
-	    export PGI_INSTALL_AMD=true; shift
+	    export PGI_INSTALL_AMD=true
 	    ;;
 	"--java")
-	    export PGI_INSTALL_JAVA=true; shift
+	    export PGI_INSTALL_JAVA=true
 	    ;;
 	"--mpi")
-	    export PGI_INSTALL_MPI=true; shift
+	    export PGI_INSTALL_MPI=true
 	    ;;
 	"--mpi-gpu")
-	    export PGI_INSTALL_MPI_GPU=true; shift
+	    export PGI_INSTALL_MPI_GPU=true
 	    ;;
 	"--managed")
-	    export PGI_INSTALL_MANAGED=true; shift
+	    export PGI_INSTALL_MANAGED=true
 	    ;;
 	"--verbose")
 	    VERBOSE=true;
