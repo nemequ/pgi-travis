@@ -5,9 +5,6 @@
 This project is intended to provide an easy way to use [PGI Community
 Edition](http://www.pgroup.com/products/community.htm) on Travis.
 
-This script was originally written for
-[Squash](https://quixdb.github.io/squash).
-
 ## Usage
 
 It is currently possible to use this script with either version of
@@ -36,10 +33,34 @@ If you do choose to have Travis download a copy every time, you can
 use this command:
 
 ```bash
-wget -q -O /dev/stdout \
+curl -s \
   'https://raw.githubusercontent.com/nemequ/pgi-travis/master/install-pgi.sh' | \
   /bin/sh
 ```
+
+Most of the time you'll want to add a PGI build to a matrix, not just
+switch to PGI.  In this case, you can do something like:
+
+```yaml
+matrix:
+  include:
+    - env: C_COMPILER=pgcc CXX_COMPILER=pgc++
+
+before_install:
+- if [ "${C_COMPILER}" = "pgcc" -o "${CXX_COMPILER}" = "pgc++" ]; then curl -s 'https://raw.githubusercontent.com/nemequ/pgi-travis/master/install-pgi.sh' | /bin/sh; fi
+
+###
+## If we use the matrix to set CC/CXX Travis overwrites the values,
+## so instead we use C/CXX_COMPILER then copy the values to CC/CXX
+## here (after Travis has set CC/CXX).
+###
+- if [ -n "${C_COMPILER}" ]; then export CC="${C_COMPILER}"; fi
+- if [ -n "${CXX_COMPILER}" ]; then export CXX="${CXX_COMPILER}"; fi
+```
+
+This can easily be extended to test multiple versions of GCC/clang in
+addition to PGI.  For an example, see
+[hedley](https://github.com/nemequ/hedley/blob/master/.travis.yml).
 
 #### Arguments
 
