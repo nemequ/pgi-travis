@@ -12,12 +12,14 @@
 # See <https://creativecommons.org/publicdomain/zero/1.0/> for
 # details.
 
-TEMPORARY_FILES="/tmp"
+TEMPORARY_FILES="/tmp/pgi"
 INSTALL_BINDIR="${HOME}/bin"
 
 export NVHPC_SILENT=true
 
-ARCH=aarch64
+if [ ! -e "/tmp/pgi" ]; then
+	mkdir -p "${TEMPORARY_FILES}"
+fi
 
 case "$(uname -m)" in
 	x86_64|ppc64le|aarch64)
@@ -28,7 +30,12 @@ case "$(uname -m)" in
 		;;
 esac
 
-URL="$(curl -s 'https://developer.nvidia.com/nvidia-hpc-sdk-download' | grep -oP "https://developer.download.nvidia.com/hpc-sdk/nvhpc_([0-9]{4})_([0-9]+)_Linux_$(uname -m)_cuda_([0-9\.]+).tar.gz")"
+URL="$(curl -s 'https://developer.nvidia.com/nvidia-hpc-sdk-downloads' | grep -oP "http[^\"]+([0-9]{4})_([0-9]+)_Linux_$(uname -m)_cuda_([0-9\.]+).tar.gz")"
+
+if [ -z "${URL}" ]; then
+	echo "Unable to find download link." >&2
+	exit 1
+fi
 
 if [ ! -z "${TRAVIS_REPO_SLUG}" ]; then
 	curl --location \
