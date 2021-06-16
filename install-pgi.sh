@@ -30,7 +30,7 @@ case "$(uname -m)" in
 		;;
 esac
 
-URL="$(curl -s 'https://developer.nvidia.com/nvidia-hpc-sdk-downloads' | grep -oP "http[^\"]+([0-9]{4})_([0-9]+)_Linux_$(uname -m)_cuda_([0-9\.]+).tar.gz")"
+URL="$(curl -s 'https://developer.nvidia.com/nvidia-hpc-sdk-downloads' | grep -oP "http[^\"<>]+([0-9]{4})_([0-9]+)_Linux_$(uname -m)_cuda_([0-9\.]+).tar.gz")"
 
 if [ -z "${URL}" ]; then
 	echo "Unable to find download link." >&2
