@@ -1,3 +1,12 @@
+# Obsolete
+
+This repository is obsolete. NVIDIA (who now owns PGI) now offers
+packages which integrate with various package managers (including
+apt, which can be used on Travis) and straightforward installation
+instructions.
+
+For details, see https://developer.nvidia.com/hpc-sdk-downloads
+
 # Install PGI Community Edition on Travis CI
 
 [![Build Status](https://travis-ci.org/nemequ/pgi-travis.svg?branch=master)](https://travis-ci.org/nemequ/pgi-travis)
